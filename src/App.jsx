@@ -298,7 +298,7 @@ Notes: ${form.notes}`;
               </span>
 
               <h1 className="hero-title">
-                A more professional way to sell automated trading as a structured managed service.
+                Welcome to Olabits-MT5 Trading Service. We Sell Automated Trading As A Structured Managed Service.
               </h1>
 
               <p className="hero-text">
