@@ -13,6 +13,12 @@ import {
   Globe,
   Phone,
   Image as ImageIcon,
+  Sparkles,
+  Wallet,
+  LineChart,
+  Layers3,
+  CircleDollarSign,
+  BadgeCheck,
 } from "lucide-react";
 import "./index.css";
 
@@ -21,9 +27,9 @@ const WHATSAPP_NUMBER = "2348035208600";
 const plans = [
   {
     name: "Starter",
-    price: "$99",
+    price: "$50",
     period: "/month",
-    description: "Good for traders starting with one account.",
+    description: "A simple plan for traders getting started with one managed setup.",
     features: [
       "1 trading account",
       "Forex + Gold support",
@@ -33,12 +39,12 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "$149",
+    price: "$100",
     period: "/month",
-    description: "Best for traders who want broader market access.",
+    description: "Best for serious traders who want broader market access and stronger support.",
     featured: true,
     features: [
-      "Forex + Crypto + Deriv",
+      "Forex + Deriv support",
       "Priority onboarding",
       "Live runtime monitoring",
       "Trade history dashboard",
@@ -49,7 +55,7 @@ const plans = [
     name: "Enterprise",
     price: "Custom",
     period: "",
-    description: "For multi-account setups and business partnerships.",
+    description: "For multi-account operations, scaling traders, and partnership deals.",
     features: [
       "Multi-account deployment",
       "Custom risk settings",
@@ -63,36 +69,36 @@ const testimonials = [
   {
     name: "Forex Client",
     role: "Swing & intraday trader",
-    text: "The portal made everything feel professional. I could see my trade history and account status without asking for updates.",
+    text: "The portal made everything feel professional. I could see trade history and account status clearly without chasing updates.",
   },
   {
     name: "Deriv Client",
     role: "Synthetic indices trader",
-    text: "The setup was clear, support was quick, and I liked that the system handled my account with clear rules and monitoring.",
+    text: "The setup was clean, support was quick, and I liked that the service had clear structure, monitoring, and rules.",
   },
   {
     name: "Crypto Client",
     role: "Multi-market trader",
-    text: "What sold me was the structured onboarding and the ability to support different market types under one service.",
+    text: "What sold me was the way the service was packaged. It felt like a real product, not just a random bot file.",
   },
 ];
 
 const faqs = [
   {
     q: "How does onboarding work?",
-    a: "You choose a plan, message me through WhatsApp, send your trading account details, and after payment confirmation I activate your service and issue portal access.",
+    a: "You choose a plan, message me through WhatsApp, send your account details, and after confirmation I activate your setup and issue portal access.",
   },
   {
     q: "Which markets are supported?",
-    a: "The service is built for Forex, Crypto, and Deriv synthetic indices depending on your plan and account setup.",
+    a: "The service is structured for Forex, Crypto, Gold, and Deriv synthetic indices depending on your plan and account setup.",
   },
   {
     q: "Do I need to keep my PC on?",
-    a: "No. The service is positioned as a managed setup, so the goal is for you to monitor through the portal while I handle the operational side.",
+    a: "No. The service is positioned as a managed setup, so your role is mainly monitoring through the portal while I handle the operational side.",
   },
   {
     q: "How do payments work?",
-    a: "For now, payments are handled manually. Once payment is confirmed, your account is set up and activated.",
+    a: "Payments are handled manually for now. Once payment is confirmed, your service is activated and onboarding begins.",
   },
 ];
 
@@ -100,54 +106,49 @@ const proofImages = [
   {
     src: "/results/result1.jpg",
     title: "Trade result proof",
-    text: "Client achieved consistent profits.",
+    text: "Real result proof that supports trust and conversion.",
   },
   {
     src: "/results/result2.jpg",
-    title: "Dashboard or account proof",
-    text: "Awesome account growth and monitoring.",
+    title: "Account performance proof",
+    text: "Clean account-level proof adds credibility to the service.",
   },
   {
     src: "/results/result3.jpg",
     title: "Bot execution proof",
-    text: "Awesome profit from automated trading.",
+    text: "Trade execution proof helps prospects believe the system is real.",
   },
-
-   {
+  {
     src: "/results/result4.jpg",
-    title: "Bot execution proof",
-    text: "Awesome profit from automated trading.",
+    title: "Growth proof",
+    text: "Growth screenshots support stronger buyer confidence.",
   },
-
-   {
+  {
     src: "/results/result7.jpg",
-    title: "Bot execution proof",
-    text: "Awesome profit from automated trading.",
+    title: "Monitoring proof",
+    text: "Shows that the service is organized and actively managed.",
   },
-
-   {
+  {
     src: "/results/result8.jpg",
-    title: "Bot execution proof",
-    text: "Awesome profit from automated trading.",
+    title: "Runtime proof",
+    text: "Useful for prospects who want structured monitoring visibility.",
   },
-
-   {
+  {
     src: "/results/result9.jpg",
-    title: "Bot execution proof",
-    text: "Awesome profit from automated trading.",
+    title: "Profit proof",
+    text: "A clean presentation of result proof is powerful for sales.",
   },
-
-   {
+  {
     src: "/results/result10.jpg",
-    title: "Bot execution proof",
-    text: "Awesome profit from automated trading.",
+    title: "Automation proof",
+    text: "Helps position the offer as a real automated trading service.",
   },
 ];
 
 function SectionTitle({ eyebrow, title, text }) {
   return (
     <div className="section-title-wrap">
-      <span className="badge badge-light">{eyebrow}</span>
+      <span className="badge badge-soft">{eyebrow}</span>
       <h2 className="section-title">{title}</h2>
       <p className="section-text">{text}</p>
     </div>
@@ -158,7 +159,7 @@ function ProofCard({ item }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="card proof-card">
+    <div className="card proof-card premium-card">
       {!imgError ? (
         <img
           src={item.src}
@@ -168,7 +169,7 @@ function ProofCard({ item }) {
         />
       ) : (
         <div className="proof-placeholder">
-          <ImageIcon size={26} />
+          <ImageIcon size={28} />
           <p>Add image to {item.src}</p>
         </div>
       )}
@@ -177,6 +178,18 @@ function ProofCard({ item }) {
         <h3>{item.title}</h3>
         <p>{item.text}</p>
       </div>
+    </div>
+  );
+}
+
+function StatMini({ icon: Icon, value, label, tone = "blue" }) {
+  return (
+    <div className={`card stat-card premium-card tone-${tone}`}>
+      <div className={`stat-icon stat-icon-${tone}`}>
+        <Icon size={18} />
+      </div>
+      <p className="stat-value">{value}</p>
+      <p className="stat-label">{label}</p>
     </div>
   );
 }
@@ -239,16 +252,20 @@ Notes: ${form.notes}`;
   }
 
   return (
-    <div className="site-shell">
-      <header className="site-header">
+    <div className="site-shell premium-theme">
+      <div className="hero-glow hero-glow-blue" />
+      <div className="hero-glow hero-glow-green" />
+      <div className="hero-glow hero-glow-purple" />
+
+      <header className="site-header glass-header">
         <div className="container nav-row">
           <div className="brand-wrap">
-            <div className="brand-icon">
+            <div className="brand-icon gradient-brand">
               <Bot size={20} />
             </div>
             <div>
               <p className="brand-title">MT5 SaaS Automation</p>
-              <p className="brand-subtitle">Managed multi-market trading service</p>
+              <p className="brand-subtitle">Managed trading service with client portal</p>
             </div>
           </div>
 
@@ -267,7 +284,7 @@ Notes: ${form.notes}`;
       </header>
 
       <main>
-        <section className="hero-section">
+        <section className="hero-section hero-premium">
           <div className="container hero-grid">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
@@ -275,19 +292,23 @@ Notes: ${form.notes}`;
               transition={{ duration: 0.5 }}
               className="hero-copy"
             >
-              <span className="badge">Forex + Crypto + Deriv Automation</span>
+              <span className="badge badge-gradient">
+                <Sparkles size={14} />
+                Forex + Deriv + Managed SaaS
+              </span>
 
               <h1 className="hero-title">
-                Managed trading SaaS with a professional client portal and direct signup funnel.
+                A more professional way to sell automated trading as a structured managed service.
               </h1>
 
               <p className="hero-text">
-                I help traders run a more structured automated trading setup with account monitoring,
-                trade visibility, subscription control, and support across Forex, Crypto, and Deriv synthetic markets.
+                I help traders move beyond raw bot files by offering a managed trading experience with
+                account monitoring, trade visibility, subscription control, onboarding support, and a
+                professional client-facing portal.
               </p>
 
               <div className="hero-actions">
-                <button className="btn" onClick={scrollToSignup}>
+                <button className="btn btn-primary" onClick={scrollToSignup}>
                   Start on WhatsApp <ArrowRight size={16} />
                 </button>
                 <a className="btn btn-outline" href="#proof">
@@ -295,19 +316,26 @@ Notes: ${form.notes}`;
                 </a>
               </div>
 
+              <div className="hero-trust-row">
+                <div className="trust-chip">
+                  <BadgeCheck size={16} />
+                  <span>Structured onboarding</span>
+                </div>
+                <div className="trust-chip">
+                  <Shield size={16} />
+                  <span>Managed operations</span>
+                </div>
+                <div className="trust-chip">
+                  <BarChart3 size={16} />
+                  <span>Client portal access</span>
+                </div>
+              </div>
+
               <div className="stats-grid">
-                <div className="card stat-card">
-                  <p className="stat-value">3</p>
-                  <p className="stat-label">Markets</p>
-                </div>
-                <div className="card stat-card">
-                  <p className="stat-value">Live</p>
-                  <p className="stat-label">Client Portal</p>
-                </div>
-                <div className="card stat-card">
-                  <p className="stat-value">Managed</p>
-                  <p className="stat-label">Service Model</p>
-                </div>
+                <StatMini icon={Globe} value="3+" label="Markets Covered" tone="blue" />
+                <StatMini icon={Users} value="Live" label="Client Portal" tone="green" />
+                <StatMini icon={Shield} value="Managed" label="Service Model" tone="purple" />
+                <StatMini icon={Wallet} value="Flexible" label="Plan Structure" tone="blue" />
               </div>
             </motion.div>
 
@@ -316,11 +344,15 @@ Notes: ${form.notes}`;
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <div className="card hero-panel">
+              <div className="card hero-panel premium-card hero-panel-premium">
                 <div className="hero-panel-head">
-                  <h3>
-                    <BarChart3 size={18} /> Service Snapshot
-                  </h3>
+                  <div>
+                    <span className="mini-label">Service Snapshot</span>
+                    <h3>
+                      <BarChart3 size={18} /> Premium managed trading offer
+                    </h3>
+                  </div>
+                  <span className="status-pill status-live">Live service model</span>
                 </div>
 
                 <div className="hero-panel-body">
@@ -329,37 +361,43 @@ Notes: ${form.notes}`;
                       {
                         icon: Activity,
                         title: "Runtime visibility",
-                        text: "Clients can view account status, floating PnL, and active positions.",
+                        text: "Clients can view account status, floating PnL, and active position updates.",
+                        tone: "blue",
                       },
                       {
                         icon: Shield,
                         title: "Admin control",
-                        text: "Manage activation, expiry, portal access, and subscription details.",
+                        text: "Manage access, expiry, activation, and subscription status cleanly.",
+                        tone: "green",
                       },
                       {
                         icon: TrendingUp,
                         title: "Trade history",
-                        text: "Track open and closed trades inside a structured client portal.",
+                        text: "Open and closed trades are presented in a more organized client-facing way.",
+                        tone: "purple",
                       },
                       {
-                        icon: Globe,
-                        title: "Scalable service",
-                        text: "Built to look and operate like a real managed trading SaaS.",
+                        icon: Layers3,
+                        title: "Scalable structure",
+                        text: "Sell it like a true SaaS service, not just a download link.",
+                        tone: "blue",
                       },
                     ].map((item) => (
-                      <div key={item.title} className="mini-box">
-                        <item.icon size={18} />
+                      <div key={item.title} className={`mini-box mini-box-${item.tone}`}>
+                        <div className={`mini-icon mini-icon-${item.tone}`}>
+                          <item.icon size={18} />
+                        </div>
                         <p className="mini-box-title">{item.title}</p>
                         <p className="mini-box-text">{item.text}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="success-note">
-                    <p className="success-note-title">Simple sales angle</p>
+                  <div className="success-note gradient-note">
+                    <p className="success-note-title">Positioning advantage</p>
                     <p>
-                      Instead of selling raw bot files, sell a managed trading service with onboarding,
-                      support, monitoring, and client access.
+                      The strongest sales angle is not “buy my bot.” It is: “subscribe to a managed
+                      trading service with monitoring, onboarding, support, and client access.”
                     </p>
                   </div>
                 </div>
@@ -372,8 +410,8 @@ Notes: ${form.notes}`;
           <div className="container">
             <SectionTitle
               eyebrow="Core features"
-              title="Everything needed to look like a real trading SaaS business"
-              text="Position your service as a structured product with onboarding, account monitoring, client access, and managed subscription control."
+              title="A more professional service package that feels structured, trustworthy, and scalable."
+              text="The goal is to present your offer like a serious fintech service with onboarding, visibility, and client-side confidence."
             />
 
             <div className="grid-4">
@@ -381,22 +419,26 @@ Notes: ${form.notes}`;
                 {
                   icon: Bot,
                   title: "Multi-market support",
-                  text: "Run and market the service for Forex, Crypto, and Deriv synthetic indices under one offer.",
+                  text: "Serve Forex, Gold, Crypto, and Deriv synthetic traders under one organized offer.",
+                  tone: "blue",
                 },
                 {
                   icon: Users,
-                  title: "Client portal",
-                  text: "Each client gets a login to view subscription, runtime status, and trade history.",
+                  title: "Client portal access",
+                  text: "Give each client a proper place to view account status, history, and access information.",
+                  tone: "green",
                 },
                 {
                   icon: CreditCard,
-                  title: "Manual onboarding ready",
-                  text: "Receive payment manually, then activate the client from your admin dashboard.",
+                  title: "Sales-ready onboarding",
+                  text: "Manual payment and direct onboarding still feel premium when the process is well presented.",
+                  tone: "purple",
                 },
                 {
                   icon: Shield,
                   title: "Operational control",
-                  text: "Enable, disable, expire, and manage access while keeping delivery organized.",
+                  text: "Manage activation, expiry, and account access in a way that supports growth.",
+                  tone: "blue",
                 },
               ].map((item, idx) => (
                 <motion.div
@@ -405,9 +447,9 @@ Notes: ${form.notes}`;
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: idx * 0.06 }}
-                  className="card feature-card"
+                  className={`card feature-card premium-card feature-tone-${item.tone}`}
                 >
-                  <div className="feature-icon">
+                  <div className={`feature-icon feature-icon-${item.tone}`}>
                     <item.icon size={20} />
                   </div>
                   <h3>{item.title}</h3>
@@ -422,8 +464,8 @@ Notes: ${form.notes}`;
           <div className="container">
             <SectionTitle
               eyebrow="Proof / results"
-              title="Screenshots that show the service is real and working for clients"
-              text="Real proof makes the service far more believable than just written claims."
+              title="Proof helps prospects trust the service faster"
+              text="When people see real dashboard screenshots, trade activity, and result proof, the service becomes easier to believe."
             />
 
             <div className="grid-3">
@@ -434,22 +476,52 @@ Notes: ${form.notes}`;
           </div>
         </section>
 
+        <section className="section-block">
+          <div className="container">
+            <div className="showcase-band premium-card">
+              <div className="showcase-copy">
+                <span className="badge badge-soft">Premium positioning</span>
+                <h3>Turn interest into trust before the first chat even starts.</h3>
+                <p>
+                  A better UI gives your service a stronger first impression. It helps prospects feel
+                  that they are dealing with a real product with process, support, structure, and proof.
+                </p>
+              </div>
+
+              <div className="showcase-metrics">
+                <div className="metric-chip">
+                  <LineChart size={16} />
+                  <span>Trade visibility</span>
+                </div>
+                <div className="metric-chip">
+                  <CircleDollarSign size={16} />
+                  <span>Managed subscriptions</span>
+                </div>
+                <div className="metric-chip">
+                  <Shield size={16} />
+                  <span>Controlled access</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="how-it-works" className="section-block">
           <div className="container">
             <SectionTitle
               eyebrow="How it works"
-              title="A simple funnel that turns interest into onboarded clients"
-              text="This process helps you qualify leads quickly and move the right people into paid onboarding."
+              title="A simple conversion flow that helps you qualify and onboard better clients"
+              text="The smoother the process feels, the easier it becomes to move prospects from interest into action."
             />
 
             <div className="grid-4">
               {[
-                "Glance/View through our page and checks pricing, proof, and features.",
-                "Fill the form and continue directly to WhatsApp.",
-                "We answer questions, confirm if they are a good fit, and receive payment manually.",
-                "We onboard you, create portal access, and activate the service.",
+                "Prospects review your page, pricing, proof, and service structure.",
+                "They fill the form and continue directly to WhatsApp.",
+                "You answer questions, qualify the lead, and confirm payment manually.",
+                "You activate the account, issue portal access, and begin managed service delivery.",
               ].map((step, idx) => (
-                <div key={step} className="card step-card">
+                <div key={step} className="card step-card premium-card">
                   <div className="step-pill">{idx + 1}</div>
                   <p>{step}</p>
                 </div>
@@ -462,25 +534,27 @@ Notes: ${form.notes}`;
           <div className="container">
             <SectionTitle
               eyebrow="Pricing"
-              title="Our Affordable Plans"
-              text="We are open for discussion. We can adjust based on account size, support level, or market coverage."
+              title="Clear plans with room for tailored onboarding"
+              text="Use simple pricing to reduce friction, while still leaving space for custom setups based on support level or market coverage."
             />
 
             <div className="grid-3">
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`card pricing-card ${plan.featured ? "pricing-featured" : ""}`}
+                  className={`card pricing-card premium-card ${plan.featured ? "pricing-featured" : ""}`}
                 >
                   <div className="pricing-head">
                     <div className="pricing-title-row">
                       <h3>{plan.name}</h3>
-                      {plan.featured ? <span className="badge">Popular</span> : null}
+                      {plan.featured ? <span className="badge badge-gradient">Popular</span> : null}
                     </div>
+
                     <div className="price-row">
                       <span className="price">{plan.price}</span>
                       <span className="price-period">{plan.period}</span>
                     </div>
+
                     <p className="pricing-desc">{plan.description}</p>
                   </div>
 
@@ -493,7 +567,7 @@ Notes: ${form.notes}`;
                     ))}
                   </ul>
 
-                  <button className="btn btn-full" onClick={scrollToSignup}>
+                  <button className={`btn btn-full ${plan.featured ? "btn-primary" : ""}`} onClick={scrollToSignup}>
                     Choose {plan.name}
                   </button>
                 </div>
@@ -504,10 +578,11 @@ Notes: ${form.notes}`;
 
         <section id="signup-funnel" className="section-block">
           <div className="container signup-grid">
-            <div className="card">
+            <div className="card premium-card signup-card">
               <div className="card-header">
-                <h3>Signup funnel</h3>
-                <p>Fill this in and continue directly to WhatsApp so we can discuss your setup.</p>
+                <span className="mini-label">Client signup funnel</span>
+                <h3>Tell me about your trading setup</h3>
+                <p>Fill this in and continue directly to WhatsApp so I can understand your setup faster.</p>
               </div>
 
               <form className="form-grid" onSubmit={handleSubmit}>
@@ -588,18 +663,18 @@ Notes: ${form.notes}`;
                   />
                 </div>
 
-                <div className="full-span progress-box">
+                <div className="full-span progress-box premium-progress">
                   <div>
                     <p className="progress-title">Form completion</p>
                     <p className="progress-text">
-                      Complete the key fields so I can understand your setup faster.
+                      Completing the key fields makes onboarding and qualification much faster.
                     </p>
                   </div>
                   <div className="progress-value">{completion}%</div>
                 </div>
 
                 <div className="full-span action-row">
-                  <button type="submit" className="btn">
+                  <button type="submit" className="btn btn-primary">
                     Continue on WhatsApp
                   </button>
                   <button type="button" className="btn btn-outline" onClick={handleQuickWhatsapp}>
@@ -610,45 +685,47 @@ Notes: ${form.notes}`;
             </div>
 
             <div className="side-stack">
-              <div className="card">
+              <div className="card premium-card">
                 <div className="card-header">
-                  <h3>Why prospects convert</h3>
+                  <span className="mini-label">Why prospects convert</span>
+                  <h3>Trust improves when structure is visible</h3>
                 </div>
-                <div className="info-list">
-                  <div className="conversation-box">
-                    <p>
-                      I know most people are tired of empty bot promises, so the way I position this service is simple:
-                      I don’t just tell a prospect that the bot works — I show the structure behind it.
-                    </p>
-                    <p>
-                      I show that there is a client portal, monitored runtime, trade history, subscription control,
-                      and an actual onboarding process. That alone makes it feel more serious and trustworthy.
-                    </p>
-                    <p>
-                      Then the real difference comes from proof. When a prospect sees genuine screenshots of trade results,
-                      account activity, and the dashboard itself, it becomes easier for them to believe they are dealing with
-                      a real working service and not just marketing talk.
-                    </p>
-                    <p>
-                      That is why this page should speak like a real person, show real proof, and move the prospect straight
-                      into WhatsApp where I can answer questions and close them properly.
-                    </p>
-                  </div>
+
+                <div className="conversation-box">
+                  <p>
+                    Most prospects are tired of empty promises. That is why this page should not sound
+                    like hype. It should feel organized, credible, and human.
+                  </p>
+                  <p>
+                    When people see proof, monitoring, onboarding flow, subscription structure, and a
+                    real portal concept, the service feels more serious and easier to trust.
+                  </p>
+                  <p>
+                    Instead of just telling people that the bot works, the page should show that the
+                    entire service is built around structure, support, visibility, and process.
+                  </p>
+                  <p>
+                    That is what helps move a prospect from curiosity into a real WhatsApp conversation.
+                  </p>
                 </div>
               </div>
 
-              <div className="card">
+              <div className="card premium-card">
                 <div className="card-header">
-                  <h3>Direct contact</h3>
+                  <span className="mini-label">Direct contact</span>
+                  <h3>WhatsApp onboarding support</h3>
                 </div>
+
                 <div className="info-row">
                   <Phone size={16} />
-                  <span>WhatsApp onboarding support</span>
+                  <span>Fast, personal, and direct communication</span>
                 </div>
+
                 <div className="muted-box">
                   <p>
-                    I prefer to handle all communication through WhatsApp because it’s more direct, personal, and convenient for most people.
-                    It also allows me to quickly answer questions, build rapport, and guide them through the onboarding process without back-and-forth emails.
+                    I prefer to handle communication through WhatsApp because it is more direct and
+                    allows me to answer questions, build trust, and guide prospects through onboarding
+                    without friction.
                   </p>
                 </div>
               </div>
@@ -660,13 +737,13 @@ Notes: ${form.notes}`;
           <div className="container">
             <SectionTitle
               eyebrow="Testimonials"
-              title="What clients say about the service"
-              text="Testimonials our clients use to build trust and show the value of your service."
+              title="Client feedback builds social proof"
+              text="Testimonials help reinforce the quality of your process and the professionalism of the service."
             />
 
             <div className="grid-3">
               {testimonials.map((item) => (
-                <div key={item.name} className="card testimonial-card">
+                <div key={item.name} className="card testimonial-card premium-card">
                   <p className="testimonial-text">“{item.text}”</p>
                   <div className="testimonial-meta">
                     <p className="testimonial-name">{item.name}</p>
@@ -682,13 +759,13 @@ Notes: ${form.notes}`;
           <div className="container">
             <SectionTitle
               eyebrow="FAQ"
-              title="Common questions before a client signs up"
-              text="Handle objections early so the person knows what to expect before the first conversation."
+              title="Questions people ask before they sign up"
+              text="Answering objections early reduces friction and makes the service feel more transparent."
             />
 
             <div className="faq-grid">
               {faqs.map((item) => (
-                <div key={item.q} className="card faq-card">
+                <div key={item.q} className="card faq-card premium-card">
                   <h3>{item.q}</h3>
                   <p>{item.a}</p>
                 </div>
@@ -698,14 +775,14 @@ Notes: ${form.notes}`;
         </section>
       </main>
 
-      <footer className="site-footer">
+      <footer className="site-footer premium-footer">
         <div className="container footer-row">
           <div>
             <p className="footer-title">MT5 SaaS Automation</p>
-            <p className="footer-text">Managed trading service for Forex, Crypto, and Deriv.</p>
+            <p className="footer-text">Managed trading service for Forex, Crypto, Gold, and Deriv.</p>
           </div>
           <div className="footer-text">
-            Built to convert leads into paying managed-service clients.
+            Built to convert attention into premium managed-service clients.
           </div>
         </div>
       </footer>
